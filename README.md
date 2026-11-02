@@ -47,19 +47,17 @@ If your Python's SSL library is too old to negotiate TLS with
 already routes requests through `curl` instead of `requests` to work around
 it — see the comment in `src/extract.py`.
 
-## Get a live link for your portfolio/LinkedIn
-1. Push this repo to GitHub.
-2. Commit `data/crime.db` (small — a few hundred KB) so Streamlit Cloud
-   doesn't need to re-run the extract step.
-3. Go to [share.streamlit.io](https://share.streamlit.io) → New app → this
-   repo → main file `src/app.py` → Deploy.
+## Deployment
+Live on Streamlit Community Cloud:
+[uk-crime-trends-forecast.streamlit.app](https://uk-crime-trends-forecast-2km7uvnzwmqwdkwnj6xu4s.streamlit.app/).
+`data/crime.db` is committed, so the hosted app doesn't re-run the extract
+step on startup.
 
-## Why this project (for recruiters reading this)
-- A **second live project** built independently of the house-price
-  dashboard, showing the pattern generalises: live API → SQL warehouse →
-  served app, applied to a different domain.
-- Adds **applied statistical forecasting** (Holt's linear trend), not just
-  descriptive charts — the kind of "so what happens next" analysis a
-  business stakeholder actually asks for.
-- Multi-page app structure demonstrates comfort building something a
-  non-technical user could navigate unassisted, not just a single script.
+## Design choices
+- **Live API → SQL warehouse → app**, the same pattern as the
+  [house price monitor](https://github.com/Dinesh-0707/uk-house-price-dashboard),
+  applied to a different domain.
+- **Holt's linear trend** exponential smoothing for the 3-month forecast,
+  fitted per city on monthly totals.
+- **Multi-page app** so each question (overview, categories, comparison,
+  forecast) has its own page.
